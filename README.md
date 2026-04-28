@@ -2,7 +2,7 @@
 ASE 220 Final Project
 
 200-word abstract: 
-members: Tracey Kayembe Kamwimbi & Glorious G
+members: Tracey Kayembe Kamwimbi & Glorious Gbeblewou
 Video Link:
 Technologies uses:
 Setup and run instructions
