@@ -1,38 +1,76 @@
 const express = require("express");
-const Item = require("../models/Item");
-const auth = require("../middleware/authMiddleware");
-
 const router = express.Router();
+const Item = require("../models/Item");
 
-// GET items by list
-router.get("/:listId", auth, async (req, res) => {
-  const items = await Item.find({ listId: req.params.listId });
-  res.json(items);
+// CREATE
+router.post("/add", async (req, res) => {
+  try {
+    const item = new Item(req.body);
+    await item.save();
+    res.status(201).json(item);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// CREATE item
-router.post("/:listId", auth, async (req, res) => {
-  const item = new Item({
-    name: req.body.name,
-    quantity: req.body.quantity,
-    prices: req.body.prices,
-    listId: req.params.listId
-  });
-
-  await item.save();
-  res.json(item);
+// READ All items
+router.get("/", async (req, res) => {
+  try {
+    const items = await Item.find();
+    res.status(200).json(items);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// UPDATE item
 router.put("/:id", auth, async (req, res) => {
-  await Item.findByIdAndUpdate(req.params.id, req.body);
-  res.json({ message: "Updated" });
+  try {
+    const { name, quantity, prices, listId } = req.body;
+
+    const updatedItem = await Item.findByIdAndUpdate(
+      req.params.id,
+      {
+        name,
+        quantity,
+        prices,
+        listId
+      },
+      {
+        new: true,        // returns updated document
+        runValidators: true // ensures schema rules apply
+      }
+    );
+
+    if (!updatedItem) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    res.status(200).json({
+      message: "Item updated successfully",
+      item: updatedItem
+    });
+
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
-// DELETE item
-router.delete("/:id", auth, async (req, res) => {
-  await Item.findByIdAndDelete(req.params.id);
-  res.json({ message: "Deleted" });
+// DELETE
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedItem = await Item.findByIdAndDelete(req.params.id);
+
+    if (!deletedItem) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    res.status(200).json({
+      message: "Item deleted successfully",
+      item: deletedItem
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 module.exports = router;
