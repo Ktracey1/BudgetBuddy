@@ -12,7 +12,7 @@ Core functionality includes full CRUD operations for grocery lists and items, us
 
 Video Link:
 
-**Tech Stack**  
+#### Tech Stack
 *Frontend:*
 - React
 - JavaScript
@@ -23,14 +23,17 @@ Video Link:
 *Backend:*
 - Node.js
 - Express.js
-- MongoDB
-- Mongoose
+- MongoDB + Mongoose
+
+*Authentication:*
 - JSON Web Tokens (JWT)
-- bcrypt
+- bcrypt (password hashing)
 
 
-**Setup and Run Instructions**
+#### Setup and Run Instructions
 1. Clone the Repository
+   - git clone 
+   - cd BudgetBuddy
 2. Start the Backend Server:
    - cd server
    - npm install
@@ -43,71 +46,87 @@ Backend runs on: http://localhost:5000
    - npm start  
 Frontend runs on: http://localhost:3000
 
-**Test credentials for authenticated users**  
+#### Test credentials for authenticated users 
 Username: testuser  
 Password: test123
 
 
-***List of completed MVPs -***  
+#### List of completed MVPs -
 **User Authentication**  
-- Register
-- Login
-- Logout
+- User registration and login
+- JWT-based authentication
 - Protected routes
   
-**Grocery Lists (CRUD)**   
+**Grocery Management**   
 Users can:
-- Create a list (with a budget)
-- View their lists
-- Edit list name/budget
-- Delete a list
-
-**Grocery Items (CRUD)**  
-Inside each list:
-- Add item (name, quantity)
-- Edit item
-- Delete item
-- View items
+- Add grocery items
+- View all saved items
+- Update item details
+- Delete items
 
 **Store Price Comparison**  
-For each item:
-- Add prices for multiple stores
-- View price comparison
-- Identify the cheapest option
+- Store multiple prices per item
+- Automatically compare store prices
+- Identify cheapest store per item
+- Calculate savings between cheapest and most expensive options
 
-**Budget Tracking**   
-- Show total cost of list
-- Compare total vs budget
+**Data Persistence**   
+- All data stored in MongoDB
+- Data persists after refresh and server restart
 
-**Stretch Features**  
+**Responsive UI**
+- Works on desktop and mobile devices
+
+#### Stretch Features**  
 - Side-by-side store comparison view
 - Automatic cheapest store highlighting
-- Sorting/filtering items by price or name
+- Budget tracking concept
 
-#### Comprehensive REST API documentation that includes  
-**API path**  
-*Auth*  
-- POST /api/auth/register: creates a new user account
-- POST /api/auth/login: authenticate user and return JWT token
+#### API Documentation  
+Base URL: http://localhost:5000/api
 
-*Lists*  
-- GET /api/lists: gets all lists for logged-in user
-- POST /api/lists: creates a grocery list
-- PUT /api/lists/:id: updates a list
-- DELETE /api/lists/:id: deletes a list
+#### AUTH ROUTES
+**Register User** 
+POST /auth/register  
+Purpose: Create a new user account  
+Request Body: username, email, password  
+Response: User created successfully  
 
-*Items*  
-- GET /api/lists/:listId/items: get items in a list
-- POST /api/lists/:listId/items
-- PUT /api/items/:itemId
-- DELETE /api/items/:itemId: deletes an item
+**Login User**  
+POST /auth/login  
+Purpose: Authenticate user and return JWT token  
+Request Body: email, password  
+Response: JWT token  
 
-**Possible Errors:**
-- 400 -> Bad Request
-- 401 -> Unauthorized
-- 403 -> Forbidden
-- 404 -> Not Found
-- 500 -> Server Error
+#### ITEM ROUTES (Protected - JWT required)  
+**Get All Items**  
+GET /items  
+Purpose: Retrieve all grocery items  
+
+**Get Items by List**
+GET /items/:listId  
+Purpose: Retrieve items in a specific list.  
+
+**Add Item**  
+POST /items/add  
+Purpose: Create a grocery item with prices  
+
+**Update Item**    
+PUT /items/:id  
+Purpose: Update an existing item  
+
+**Delete Item**  
+DELETE /items/:id  
+Purpose: Delete an item  
+
+#### PRICE COMPARISON  
+Each item contains multiple store prices.
+System compares prices to find cheapest store and savings.
+
+#### ERROR RESPONSES
+401 Unauthorized: Missing or invalid token
+404 Not Found: Item does not exist
+500 Server Error: Internal issue
 
 **Notes for Graders**
 - Both frontend and backend must be running simultaneously
