@@ -10,7 +10,7 @@ Core functionality includes full CRUD operations for grocery lists and items, us
 
 **Members:** Tracey Kayembe Kamwimbi & Glorious Gbeblewou
 
-Video Link:
+Video Link: https://www.youtube.com/watch?v=svjQ8ECfADo&t=1s
 
 #### Tech Stack
 *Frontend:*
