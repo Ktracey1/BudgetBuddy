@@ -1,0 +1,24 @@
+{"#comment":"",
+"html":
+{"@lang":"en","head":
+{"meta":[
+  {"@charset":"UTF-8"},
+  {"@name":"viewport","@content":"width=device-width,initial-scale=1.0"}
+  ],
+  "title":"LoginSystem","#comment":"",
+  "link":{"@rel":"stylesheet","@href":"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"}},"body":{"#comment":["","",""],
+  "section":
+  {"@id":"login","@class":"containermt-5","div":
+  {"@class":"rowjustify-content-center","div":
+  {"@class":"col-md-4","h2":"Login","form":
+  {"@id":"loginForm","div":
+  [{"@class":"form-group","label":
+  {"@for":"username","#text":"Username:"},
+  "input":{"@type":"text","@class":"form-control","@id":"username","@placeholder":"Enterusername","@required":""}},
+  {"@class":"form-group","label":
+  {"@for":"password","#text":"Password:"},
+  "input":
+  {"@type":"password","@class":"form-control","@id":"password","@placeholder":"Enterpassword","@required":""}}],
+  "button":{"@type":"submit","@class":"btnbtn-primaryw-100","#text":"Login"}}}}},
+  "script":[{"@src":"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"},
+  {"@src":"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"},{"@src":"script.js"}]}}}

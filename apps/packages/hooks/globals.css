@@ -1,0 +1,52 @@
+/* 1. Use @theme to define your custom colors so you can use them as utility classes */
+@theme {
+    --color-brand-pink: #F49FBC;
+    --color-kroger-blue: #0059a3;
+    --color-walmart-yellow: #ffc220;
+    --color-costco-red: #e31837;
+}
+
+/* 2. Standard CSS variables for theme switching */
+:root {
+    --background: #f8fafc;
+    --foreground: #0f172a;
+}
+
+/* 3. Base Styles */
+@layer base {
+    body {
+        background-color: var(--background);
+        color: var(--foreground);
+        @apply font-sans antialiased;
+        /* Use Tailwind's built-in font and smoothing */
+    }
+}
+
+/* 4. Component Classes */
+@layer components {
+
+    /* Using @apply makes your custom button respect Tailwind's design tokens */
+    .btn-primary {
+        @apply bg-[--color-brand-pink] text-white px-5 py-2.5 rounded-lg;
+        @apply transition-all duration-200 ease-in-out;
+        display: inline-block;
+        /* Ensures padding/transform works correctly */
+    }
+
+    .btn-primary:hover {
+        @apply -translate-y-0.5 shadow-md;
+    }
+
+    /* Store-specific borders */
+    .store-kroger {
+        @apply border-l-4 border-[--color-kroger-blue];
+    }
+
+    .store-walmart {
+        @apply border-l-4 border-[--color-walmart-yellow];
+    }
+
+    .store-costco {
+        @apply border-l-4 border-[--color-costco-red];
+    }
+}
